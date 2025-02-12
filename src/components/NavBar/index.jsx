@@ -1,19 +1,24 @@
 import { LogOut } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function NavegationBar({ user }) {
 
-  const [userState, setUserState] = useState(user);
-  const [movies, setMovies] = useState([]);
+function NavegationBar({ user, searchMovie, resetMovies}) {
+
   const navigate = useNavigate();
 
+  const [userState, setUserState] = useState(user);
+  const [input, setInput] = useState('');
+
+  const notifyError = () => {
+    toast.error("Enter a value into the input to search!", {
+      position: "top-right",
+      autoClose: 3000
+    });
+  }
 
   return (
     <Navbar expand="lg" variant="dark" bg="dark" className='fixed-top'>
@@ -25,7 +30,12 @@ function NavegationBar({ user }) {
             <Nav.Link
               className='text-light'
               onClick={() => {
-                navigate('/home', { replace: true, state: { user: userState } }, window.scrollTo(0, 0))
+                navigate(
+                  '/home',
+                  { replace: true, state: { user: userState } },
+                  window.scrollTo(0, 0),
+                  resetMovies()
+                )
               }}
             >
               Home
@@ -51,8 +61,17 @@ function NavegationBar({ user }) {
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              onChange={(e) => { setInput(e.target.value) }}
             />
-            <Button variant="outline-success">Search</Button>
+            <Button variant="outline-success" onClick={() => {
+              if (input.trim().length === 0) {
+                notifyError();
+
+              } else {
+                searchMovie(input);
+              }
+            }}>Search</Button>
+            <ToastContainer />
           </Form>
         </Navbar.Collapse>
       </Container>

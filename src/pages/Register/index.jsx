@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { saveUser } from '../../services/user';
 
 function RegisterPage() {
 
@@ -59,12 +59,13 @@ function RegisterPage() {
 
 
             try {
-                const response = await axios.post('http://localhost:8080/user/save', user);
+                await saveUser(user);
                 setError('')
                 navigate('/login')
 
             } catch (err) {
-                setError(err.response.data[0] || err.response.data.message);
+                setError(err.message);
+                setLoading(false);
             }
         }
 

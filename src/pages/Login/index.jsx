@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Modal from 'react-bootstrap/Modal';
-import axios from 'axios';
+import { getUserByEmail } from '../../services/user';
 
 
 function LoginPage() {
@@ -56,7 +55,7 @@ function LoginPage() {
         } else {
 
             try {
-                const user = await fetchUserByEmail(formData.email);
+                const user = await getUserByEmail(formData.email);
                 setError('')
                 navigate('/home', { state: {user} })
 
@@ -83,7 +82,7 @@ function LoginPage() {
         setLoading(true);
 
         try {
-            const data = await fetchUserByEmail(formData.email);
+            const data = await getUserByEmail(formData.email);
 
             setError('')
             setFormData(prevState => ({
@@ -100,16 +99,7 @@ function LoginPage() {
 
 
 
-    const fetchUserByEmail = async (email) => {
-        try {
-            const response = await axios.get(`http://localhost:8080/user/findByEmail/${formData.email}`);
-            return response.data
-
-        } catch (err) {
-            const errorMessage = err.response?.data?.[0] || err.response?.data?.message || "Unknown error";
-            throw new Error(errorMessage);
-        }
-    }
+    
 
 
 
