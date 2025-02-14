@@ -55,7 +55,7 @@ function NavegationBar({ user, searchMovie, resetMovies}) {
             </NavDropdown>
           </Nav>
 
-          <Form className="d-flex">
+          <Form className="d-flex" onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}>
             <Form.Control
               type="search"
               placeholder="Search"

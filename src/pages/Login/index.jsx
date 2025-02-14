@@ -5,18 +5,23 @@ import { getUserByEmail } from '../../services/user';
 
 
 function LoginPage() {
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
-
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
-
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-
+    const navigate = useNavigate();
+    const handleClose = () => {
+        setShow(false);
+        setError('');
+        setFormData({
+            email: '',
+            password: '',
+        });
+    }
 
     const handlerChange = (e) => {
         const { name, value } = e.target;
@@ -38,69 +43,78 @@ function LoginPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
-        setLoading(true)
-
-
-        if (formData.email.trim().length === 0) {
+        if (!formData.email.trim()) {
             setError("The email must be provided");
             setLoading(false);
             return;
-
-        } else if (formData.password.trim().length === 0) {
-            setError("The passssword must be provided");
-            setLoading(false);
-            return;
-
-        } else {
-
-            try {
-                const user = await getUserByEmail(formData.email);
-                setError('')
-                navigate('/home', { state: {user} })
-
-            } catch (err) {
-                setError(err.message);
-                setLoading(false);
-            }
-
         }
 
-    }
+        if (!formData.password.trim()) {
+            setError("The password must be provided");
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const user = await getUserByEmail(formData.email);
+
+            if (!user || !user.password) {
+                setError("User not found or invalid user data");
+                setLoading(false);
+                return;
+            }
+
+            if (formData.password !== String(user.password)) {
+                setError("The password is incorrect");
+                setLoading(false);
+                return;
+            }
+
+            setError('');
+            navigate('/home', { state: { user } });
+        } catch (err) {
+            setError("An error occurred. Please try again.");
+        }
+
+        setLoading(false);
+    };
+
 
 
 
 
     const handlerSubmitModal = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError('');
 
-        if (formData.email.trim().length === 0) {
+        if (!formData.email.trim()) {
             setError("The email must be provided");
+            setLoading(false);
             return;
         }
 
-        setLoading(true);
-
         try {
-            const data = await getUserByEmail(formData.email);
+            const user = await getUserByEmail(formData.email);
 
-            setError('')
-            setFormData(prevState => ({
-                ...prevState,
-                password: data.password
+            if (!user || !user.password) {
+                setError("User not found");
+                setLoading(false);
+                return;
+            }
+
+            setFormData((prev) => ({
+                ...prev, password: user.password
             }));
 
         } catch (err) {
-            setError(err.message);
-            setLoading(false);
+            setError("Error retrieving password");
         }
 
-    }
-
-
-
-    
-
+        setLoading(false);
+    };
 
 
     return (
@@ -123,7 +137,7 @@ function LoginPage() {
 
                 <Form.Group className="mb-3" controlId="formGridEmail">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control placeholder="name@gmail.com" name='email' onChange={handlerChange} value={formData.email} />
+                    <Form.Control type='email' placeholder="name@gmail.com" name='email' onChange={handlerChange} value={formData.email} />
                 </Form.Group>
 
                 <Row className="mb-3">

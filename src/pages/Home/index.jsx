@@ -32,20 +32,20 @@ function HomePage() {
     };
 
     const toggleFavorite = (movie) => {
-        setFavoriteMovies(prevFavoriteMovies => {
-            const updatedFavorites = prevFavoriteMovies.some(fav => fav.id === movie.id)
-                ? prevFavoriteMovies.filter(fav => fav.id !== movie.id)
-                : [...prevFavoriteMovies, movie];
+        const updatedFavorites = favoriteMovies.some(fav => fav.id === movie.id)
+            ? favoriteMovies.filter(fav => fav.id !== movie.id)
+            : [...favoriteMovies, movie];
 
-            const updatedMovies = updatedFavorites.map(fav => ({
+        setFavoriteMovies(updatedFavorites);
+
+        const updatedUser = {
+            ...user,
+            movies: updatedFavorites.map(fav => ({
                 ...fav,
-                user: user
-            }));
-
-            console.log(updatedMovies);
-            return updatedMovies;
-
-        });
+                user: { id: user.id }
+            }))
+        };
+        updateUserWithMovie(updatedUser);
     };
 
     const searchMovie = async (input) => {
@@ -131,23 +131,22 @@ function HomePage() {
                             placement="top"
                             overlay={
                                 <Tooltip id="tooltip-favorite">
-                                    {favoriteMovies.some(fav => fav.id === selectedMovie.id) ? 'Remove from Favorites' : 'Add to Favorites'}
+                                    {favoriteMovies.some(fav => fav.id === selectedMovie.id) ? '' : 'Add to Favorites'}
                                 </Tooltip>
                             }
                         >
-                            <Button
-                                className='bg-transparent p-0'
-                                onClick={() => {
-                                    toggleFavorite(selectedMovie)
-                                    updateUserWithMovie(user)
-                                }}
-                            >
-                                {favoriteMovies.some(fav => fav.id === selectedMovie.id) ? (
-                                    <CalendarCheck size={35} color="green" />
-                                ) : (
+
+                            {favoriteMovies.some(fav => fav.id === selectedMovie.id) ? (
+                                <CalendarCheck size={35} color="green" />
+                            ) : (
+                                <Button
+                                    className='bg-transparent p-0'
+                                    onClick={() => toggleFavorite(selectedMovie)}
+                                >
                                     <CalendarX size={35} color="red" />
-                                )}
-                            </Button>
+                                </Button >
+
+                            )}
                         </OverlayTrigger>
 
                     </Modal.Footer>
