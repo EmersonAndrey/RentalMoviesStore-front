@@ -3,14 +3,16 @@ import { useState } from 'react';
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { fetchMovies, searchMoviesByInput } from '../../services/tmdbAPI';
+import { useAppContext } from '../../contexts/AppContext';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-function NavegationBar({ user, searchMovie, resetMovies}) {
+function NavegationBar() {
 
   const navigate = useNavigate();
 
-  const [userState, setUserState] = useState(user);
+  const { user, setMovies } = useAppContext();
   const [input, setInput] = useState('');
 
   const notifyError = () => {
@@ -18,6 +20,17 @@ function NavegationBar({ user, searchMovie, resetMovies}) {
       position: "top-right",
       autoClose: 3000
     });
+  }
+
+
+  const searchMovie = async (input) => {
+    const data = await searchMoviesByInput(input);
+    setMovies(data);
+  }
+
+  const resetMovies = async () => {
+    const moviesData = await fetchMovies();
+    setMovies(moviesData);
   }
 
   return (
@@ -32,21 +45,36 @@ function NavegationBar({ user, searchMovie, resetMovies}) {
               onClick={() => {
                 navigate(
                   '/home',
-                  { replace: true, state: { user: userState } },
-                  window.scrollTo(0, 0),
-                  resetMovies()
-                )
+                  { replace: true, state: { user: user } }
+                );
+                window.scrollTo(0, 0);
+                resetMovies();
+                setInput('');
               }}
             >
               Home
             </Nav.Link>
             <NavDropdown
-              title={<span className='text-light'>{userState.name}</span>}
+              title={<span className='text-light'>{user.name}</span>}
               id="navbarScrollingDropdown"
               menuVariant='dark'
             >
               <NavDropdown.Item href="#action3" className="text-white">My Account</NavDropdown.Item>
-              <NavDropdown.Item href="#action4" className="text-white">Favorites</NavDropdown.Item>
+              <NavDropdown.Item
+                as="div"
+                role='button'
+                onClick={() => {
+                  navigate('/favorites', {
+                    replace: true,
+                    state: { user: user }
+                  });
+                  setInput('');
+                  window.scrollTo(0, 0);
+                }}>
+                Favorites
+
+              </NavDropdown.Item>
+
               <NavDropdown.Divider />
               <NavDropdown.Item as={NavLink} to={"/register"} className="text-danger fw-bold d-flex align-items-center gap-2">
                 Exit
@@ -61,6 +89,7 @@ function NavegationBar({ user, searchMovie, resetMovies}) {
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              value={input}
               onChange={(e) => { setInput(e.target.value) }}
             />
             <Button variant="outline-success" onClick={() => {

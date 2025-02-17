@@ -26,7 +26,6 @@ export const getUserByEmail = async (userEmail) => {
 
 export const updateUserWithMovie = async (user) => {
     try {
-        console.log(`Usuário prestes a persistir ${user.email}`)
         const response = await axios.put(`${BASE_URL}/update/${user.email}`, user);
         return response.data;
 

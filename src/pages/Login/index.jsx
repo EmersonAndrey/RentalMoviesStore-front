@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { Button, Col, Container, Form, Row, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { getUserByEmail } from '../../services/user';
+import { useAppContext } from '../../contexts/AppContext';
 
 
 function LoginPage() {
 
+    const { setUser } = useAppContext();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -73,6 +75,7 @@ function LoginPage() {
             }
 
             setError('');
+            setUser(user);
             navigate('/home', { state: { user } });
         } catch (err) {
             setError("An error occurred. Please try again.");

@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { saveUser } from '../../services/user';
+import { useAppContext } from '../../contexts/AppContext';
 
 function RegisterPage() {
-
+    
+    const { setUser } = useAppContext();
     const [formData, setFormData] = useState({
         name: '',
         lastName: '',
@@ -59,6 +61,7 @@ function RegisterPage() {
 
 
             try {
+                setUser(user);
                 await saveUser(user);
                 setError('')
                 navigate('/login')
