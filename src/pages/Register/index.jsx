@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { saveUser } from '../../services/user-back';
 import { useAppContext } from '../../contexts/AppContext';
+import { toast, ToastContainer } from "react-toastify";
 
 function RegisterPage() {
 
@@ -19,6 +20,21 @@ function RegisterPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        console.log(localStorage.getItem("accountDeleted"));
+        if(localStorage.getItem("accountDeleted") === 'true'){
+            toast.success("Your account has been deleted!", { position: "top-center" });
+            console.log('entrou');
+
+            setTimeout(() => {
+                localStorage.removeItem("accountDeleted");
+            }, 500);
+        }
+    }, [])
+
+
 
     const handlerChange = (e) => {
         const { name, value } = e.target;
@@ -81,7 +97,7 @@ function RegisterPage() {
         <Container
             fluid className="d-flex justify-content-center align-items-center text-white flex-column"
             style={{ height: '100vh', backgroundColor: '#202b34' }}>
-            <h1 className='mb-4'>User Register</h1>
+            <h1 className='mb-4 signika-font'>User Register</h1>
             <Form
                 onSubmit={handleSubmit}
                 style={{
@@ -138,6 +154,7 @@ function RegisterPage() {
                     </Button>
                 </footer>
             </Form>
+            <ToastContainer/>
         </Container>
     );
 }

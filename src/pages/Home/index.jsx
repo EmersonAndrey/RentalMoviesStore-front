@@ -75,14 +75,14 @@ function HomePage() {
 
                 {movies?.length !== 0 && (
                     <div>
-                        <h1 className='d-flex justify-content-center text-light mt-5 text-center'>Welcome To The Video Rental Store</h1>
-                        <h3 className='d-flex justify-content-center text-light mt-1 text-center'>Select a movie and add it to your list</h3>
+                        <h1 className='d-flex justify-content-center text-light mt-5 text-center signika-font'>Welcome To The Video Rental Store</h1>
+                        <h3 className='d-flex justify-content-center text-light mt-1 text-center signika-font'>Select a movie and add it to your list</h3>
                     </div>
                 )}
 
                 {movies?.length === 0 && (
                     <div className="position-fixed top-50 start-50 translate-middle">
-                        <h1 className='text-danger'>
+                        <h1 className='text-danger text-center'>
                             No movie found
                         </h1>
                     </div>
@@ -168,8 +168,6 @@ function HomePage() {
                                     </Button >
                                 )}
                             </OverlayTrigger>
-
-
                         </Modal.Footer>
                     </Modal>
                 )}

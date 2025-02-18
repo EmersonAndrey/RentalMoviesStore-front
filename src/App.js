@@ -5,6 +5,7 @@ import HomePage from "./pages/Home"
 import Favorites from "./pages/Favorites";
 import { AppProvider } from "./contexts/AppContext";
 import MyAccount from "./pages/MyAccount";
+import './App.css'
 
 function App() {
   return (

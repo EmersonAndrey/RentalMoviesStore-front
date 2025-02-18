@@ -73,7 +73,13 @@ function NavegationBar() {
               </NavDropdown.Item>
 
               <NavDropdown.Divider />
-              <NavDropdown.Item as={NavLink} to={"/register"} className="text-danger fw-bold d-flex align-items-center gap-2">
+              <NavDropdown.Item
+                as={NavLink}
+                to={"/register"}
+                className="text-danger fw-bold d-flex align-items-center gap-2"
+                onClick={() => {
+                  localStorage.removeItem("user");
+                }}>
                 Exit
                 <LogOut size={18} />
               </NavDropdown.Item>

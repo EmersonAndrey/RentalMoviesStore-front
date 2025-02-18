@@ -63,13 +63,13 @@ function Favorites() {
 
                 <div>
                     {favoriteMovies?.length !== 0 && (
-                        <h1 className=' d-flex justify-content-center text-light mt-5 text-center'>Your favorites List</h1>
+                        <h1 className=' d-flex justify-content-center text-light mt-5 text-center signika-font'>Your favorites List</h1>
                     )}
                 </div>
 
                 {favoriteMovies?.length === 0 && (
                     <div className="position-fixed top-50 start-50 translate-middle">
-                        <h1 className='text-danger'>
+                        <h1 className='text-danger text-center'>
                             No films added to the list yet!
                         </h1>
                     </div>

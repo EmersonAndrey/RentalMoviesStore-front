@@ -124,7 +124,7 @@ function LoginPage() {
         <Container
             fluid className="d-flex justify-content-center align-items-center text-white flex-column "
             style={{ height: '100vh', backgroundColor: '#202b34' }}>
-            <h1 className='mb-4'>User Login</h1>
+            <h1 className='mb-4 signika-font'>User Login</h1>
             <Form
                 onSubmit={handleSubmit}
                 style={{

@@ -135,16 +135,19 @@ function MyAccount() {
 
         const loadingToast = toast.loading("Loading...", { position: "top-center" });
         setShowModalDelete(false);
-        //TESTAR SE TA DELETANDOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         try {
             await deleteUser(user);
-            navigate('/register');
-            toast.update(loadingToast, {
-                render: "Your account has been deleted!",
-                type: "success",
-                isLoading: false,
-                autoClose: 3000,
-            });
+
+            localStorage.removeItem("user");
+
+            localStorage.setItem("accountDeleted", "true");
+
+
+            setTimeout(() => {
+                navigate('/register');
+            }, 300);
+
 
         } catch (err) {
             toast.update(loadingToast, {
@@ -183,7 +186,7 @@ function MyAccount() {
 
                     <h1 className='mb-4 d-flex align-items-center gap-3 mt-4'>
                         <CircleUser color='white' size={60} />
-                        <h1>My Account</h1>
+                        <h1 className='signika-font mt-2'>My Account</h1>
                     </h1>
 
                     <Form
