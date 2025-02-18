@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Col, Container, Form, Row, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { getUserByEmail } from '../../services/user';
+import { getUserByEmail } from '../../services/user-back';
 import { useAppContext } from '../../contexts/AppContext';
 
 
@@ -170,8 +170,8 @@ function LoginPage() {
                         </Modal.Header>
                         <Modal.Body className='bg-dark text-light'>
                             <Form onSubmit={handlerSubmitModal}>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Email address</Form.Label>
+                                <Form.Group className="mb-3 text-start" controlId="exampleForm.ControlInput1">
+                                    <Form.Label >Email address</Form.Label>
                                     <Form.Control
                                         type="email"
                                         placeholder="name@example.com"
@@ -190,7 +190,7 @@ function LoginPage() {
                             {formData.password && <p className="text-danger text-center fs-5 flex-column" >Your password is: {formData.password}</p>}
 
                             <div className='d-flex justify-content-between w-100 mt-3'>
-                                <Button variant="secondary" onClick={() => {
+                                <Button className='bg-danger' onClick={() => {
                                     handleClose();
                                     setError('');
                                     setLoading(false);
@@ -198,7 +198,7 @@ function LoginPage() {
                                 }}>
                                     Close
                                 </Button>
-                                <Button variant="primary" disabled={loading} onClick={(e) => {
+                                <Button className='bg-primary' disabled={loading} onClick={(e) => {
                                     handlerSubmitModal(e);
                                 }}>
 

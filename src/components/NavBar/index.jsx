@@ -59,15 +59,12 @@ function NavegationBar() {
               id="navbarScrollingDropdown"
               menuVariant='dark'
             >
-              <NavDropdown.Item href="#action3" className="text-white">My Account</NavDropdown.Item>
+              <NavDropdown.Item href="#action3" className="text-white" as={NavLink} to={"/myAccount"}>My Account</NavDropdown.Item>
               <NavDropdown.Item
                 as="div"
                 role='button'
                 onClick={() => {
-                  navigate('/favorites', {
-                    replace: true,
-                    state: { user: user }
-                  });
+                  navigate('/favorites');
                   setInput('');
                   window.scrollTo(0, 0);
                 }}>

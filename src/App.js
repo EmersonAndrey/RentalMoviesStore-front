@@ -4,6 +4,7 @@ import LoginPage from "./pages/Login";
 import HomePage from "./pages/Home"
 import Favorites from "./pages/Favorites";
 import { AppProvider } from "./contexts/AppContext";
+import MyAccount from "./pages/MyAccount";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/myAccount" element={<MyAccount />} />
       </Routes>
     </AppProvider>
   );

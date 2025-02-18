@@ -33,3 +33,23 @@ export const updateUserWithMovie = async (user) => {
          throw new Error(err.response?.data?.message || 'Error updating user');
     }
 }
+
+export const updateUserWithNewDatas = async (user) => {
+    try {
+        const response = await axios.put(`${BASE_URL}/update/${user.email}`, user);
+        return response.data;
+
+    } catch (err) {
+         throw new Error(err.response?.data?.message || 'Error updating user');
+    }
+}
+
+export const deleteUser = async (user) => {
+    try {
+        const response = await axios.delete(`${BASE_URL}/delete/${user.email}`);
+        return response.data;
+
+    } catch (err) {
+         throw new Error(err.response?.data?.message || 'Error deleting user');
+    }
+}

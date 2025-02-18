@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { saveUser } from '../../services/user';
+import { saveUser } from '../../services/user-back';
 import { useAppContext } from '../../contexts/AppContext';
 
 function RegisterPage() {
-    
+
     const { setUser } = useAppContext();
     const [formData, setFormData] = useState({
         name: '',
@@ -130,12 +130,12 @@ function RegisterPage() {
 
                 {error && <p className="text-danger text-center fs-5" >{error}</p>}
 
-                <footer className='d-flex flex-column align-items-center mt-4' >
-                    <Button variant="primary" type="submit" className='w-25' disabled={loading}>
+                <footer className='d-flex justify-content-around align-items-center mt-4' >
+                    <Link to={"/login"} className='d-flex mt-1 align-self-center'>Is already registered?</Link>
+
+                    <Button variant="primary" type="submit" className='w-25' disabled={loading} >
                         {loading ? "Submitting..." : "Submit"}
                     </Button>
-
-                    <Link to={"/login"} className='mt-3'>Is already registered?</Link>
                 </footer>
             </Form>
         </Container>
