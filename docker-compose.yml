@@ -1,0 +1,47 @@
+# ADICIONE ESSE ARQUIVO NA RAIZ DO PROJETO QUE CONTÉM O FRONT E O BACK
+
+services:
+  backend:
+    build: ./rentalMoviesBack
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/rentalmovies
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=admin
+    networks:
+      - minha-rede
+
+  frontend:
+    build: ./rentalMoviesFront
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - minha-rede
+
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=rentalmovies
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 3
+      timeout: 5s
+    networks:
+      - minha-rede
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+networks:
+  minha-rede:
+
+volumes:
+  mysql_data:
