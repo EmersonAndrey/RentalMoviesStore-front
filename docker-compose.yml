@@ -26,7 +26,6 @@ services:
 
   mysql:
     image: mysql:8
-    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=admin
       - MYSQL_DATABASE=rentalmovies
