@@ -117,4 +117,3 @@ Após iniciar, acesse a aplicação pelo navegador:
 ## 👨‍💻 Desenvolvido por
 
 **Emerson Andrey Fausto dos Santos**  
-Emerson Andrey Fausto dos Santos
