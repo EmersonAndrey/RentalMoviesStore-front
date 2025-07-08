@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# 🎬 Rental Movies Store – Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este é o **frontend** da aplicação **Rental Movies Store**, construído com **React**, **Bootstrap**, **HTML** e **CSS**, que se comunica com o backend desenvolvido em Spring Boot. O sistema permite salvar filmes favoritos em forma de catálogo.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📹 Vídeo Demonstrativo
+[Ver post no LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7297731819163049984/)  
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Instruções de Instalação
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 1️⃣ Pré-requisitos
+Certifique-se de que seu ambiente possui os seguintes softwares instalados:
 
-### `npm test`
+- **Node.js** (versão 16 ou superior)
+- **npm** (ou `yarn` como alternativa)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+### 2️⃣ Clone o Repositório
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone https://github.com/EmersonAndrey/RentalMoviesStore-front.git
+cd RentalMoviesStore-front
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3️⃣ Instale as Dependências
 
-### `npm run eject`
+```bash
+npm install
+# ou
+yarn install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 4️⃣ Execute o Projeto
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm run dev
+# ou
+yarn dev
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+### 🌐 Acesso à Aplicação
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Após iniciar, acesse a aplicação pelo navegador:  
+[http://localhost:5173](http://localhost:5173)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## ⚠️ Observações
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- O backend deve estar em execução na porta padrão `http://localhost:8080`.
+- O `docker-compose.yml` que orquestra front e back está neste repositório.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🐳 Rodando com Docker Compose
+Este projeto inclui um arquivo docker-compose.yml para facilitar o desenvolvimento e execução do sistema completo (frontend + backend) em containers Docker.
 
-### Making a Progressive Web App
+### Passos para rodar com Docker Compose:
+- Certifique-se de ter o Docker e o Docker Compose instalados na sua máquina.
+- Clone este repositório (frontend) e o repositório do backend.
+- Execute o comando:
+  ```bash
+    docker-compose up --build
+  ```
+  
+Este comando irá:
+- Construir as imagens Docker do frontend e backend (se necessário)
+- Subir os containers com ambos os serviços
+- Mapear as portas (ex: frontend na 5173, backend na 8080)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 🌐 Acesso à Aplicação
 
-### Advanced Configuration
+Após iniciar, acesse a aplicação pelo navegador:  
+[http://localhost:5173](http://localhost:5173)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🛠️ Funcionalidades
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Tela de login e cadastro
+- Página inicial com exibição de filmes
+- Marcar filmes como favoritos
+- Visualização e remoção de favoritos
+- Comunicação com API backend em Java Spring Boot
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🧱 Tecnologias Utilizadas
+
+🔹 **Frontend**
+- ⚛️ React
+- 🎨 HTML + CSS
+- 🎛️ Bootstrap
+
+🔹 **Backend**
+- ☕ Java 17  
+- 🧩 Spring Boot  
+
+---
+
+## 🧩 Integração com o Backend
+
+🔗 [Repositório do Backend – RentalMoviesStore-back](https://github.com/EmersonAndrey/RentalMoviesStore-back)
+
+---
+
+## 👨‍💻 Desenvolvido por
+
+**Emerson Andrey Fausto dos Santos**  
+Emerson Andrey Fausto dos Santos
