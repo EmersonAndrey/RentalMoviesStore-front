@@ -2,10 +2,8 @@
 
 Este é o **frontend** da aplicação **Rental Movies Store**, construído com **React**, **Bootstrap**, **HTML** e **CSS**, que se comunica com o backend desenvolvido em Spring Boot. O sistema permite salvar filmes favoritos em forma de catálogo.
 
----
-
-## 📹 Vídeo Demonstrativo
-[Ver post no LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7297731819163049984/)  
+🔗 **Vídeo demonstrativo (upado no LinkedIn):**   
+[Ver post no LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7297731819163049984/)
 
 ---
 
