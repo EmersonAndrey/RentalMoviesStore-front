@@ -104,6 +104,9 @@ Após iniciar, acesse a aplicação pelo navegador:
 - ☕ Java 17  
 - 🧩 Spring Boot  
 
+🔹 **DataBase**
+- 💾 MySQL
+  
 ---
 
 ## 🧩 Integração com o Backend
